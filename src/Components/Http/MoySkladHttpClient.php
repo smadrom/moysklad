@@ -20,17 +20,18 @@ class MoySkladHttpClient{
     private $preRequestSleepTime = 200;
 
     private
-        $endpoint = "https://online.moysklad.ru/api/remap/1.1/",
+        $endpoint = "https://online.moysklad.ru/api/remap/",
         $posEndpoint = "https://online.moysklad.ru/api/posap/1.0/",
         $login,
         $password,
         $posToken;
 
-    public function __construct($login, $password, $posToken)
+    public function __construct($login, $password, $posToken, $apiVersion)
     {
         $this->login = $login;
         $this->password = $password;
         $this->posToken = $posToken;
+        $this->endpoint = $this->endpoint . $apiVersion . '/';
     }
 
     public function setPosToken($posToken){
@@ -217,6 +218,7 @@ class MoySkladHttpClient{
             if ( $e instanceof ClientException){
                 $req = $reqLog['req'];
                 $res = $e->getResponse()->getBody()->getContents();
+                print_r($res);
                 $except = new RequestFailedException($req, $res);
                 if ( $res = \json_decode($res) ){
                     if ( isset($res->errors) || (is_array($res) && isset($res[0]->errors))){

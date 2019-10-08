@@ -164,23 +164,7 @@ class AbstractDocument extends AbstractEntity{
         if ( !in_array($extension, $supportedExtensions) ){
             throw new \Exception("Extension must be one of: " . implode(',', $supportedExtensions));
         }
-        if ( $templateOrTemplates instanceof EntityList ){
-            foreach ( $templateOrTemplates as $template ){
-                if ( empty($template->count) || $template->count <= 0) $template->count = 1;
-                else if ( $template->count > 10 ) throw new \Exception("Template count field is more then 10");
-            }
-            $exportRequest = [
-                "templates" => $templateOrTemplates->map(function(AbstractTemplate $template){
-                    return [
-                        "template" => $template,
-                        "count" => $count,
-                        'salePrice' => $counterparty,
-                        'salePrice' => $salePrice,
-
-                    ];
-                })
-            ];
-        } else if ( $templateOrTemplates instanceof AbstractTemplate ){
+        if ( $templateOrTemplates instanceof AbstractTemplate ){
             $exportRequest = [
                 "template" => $templateOrTemplates,
                 "extension" => $extension,
