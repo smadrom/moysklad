@@ -46,7 +46,7 @@ class MoySklad{
      * @return MoySklad
      */
     public static function getInstance($login, $password, $apiVersion = '1.1', $disableHash = false, $posToken = null){
-        $hash = $disableHash ? static::makeHash($login, $password) : null;
+        $hash = $disableHash ? md5($apiVersion) : static::makeHash($login, $password);
         if ( empty(static::$instances[$hash]) ){
             static::$instances[$hash] = new static($login, $password, $posToken, $hash, $apiVersion);
             EntityRegistry::instance()->bootEntities();
