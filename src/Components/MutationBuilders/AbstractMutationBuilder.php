@@ -32,7 +32,7 @@ use MoySklad\Entities\Documents\Positions\PurchaseOrderPosition;
 use MoySklad\Entities\Documents\Positions\EnterPosition;
 use MoySklad\Entities\Documents\Positions\LossPosition;
 use MoySklad\Entities\Documents\RetailShift;
-use MoySklad\Entities\Documents\PriceList;
+use MoySklad\Entities\Documents\PriceLists\PriceList;
 use MoySklad\Entities\Documents\Processings\Processing;
 use MoySklad\Entities\Documents\Processings\ProcessingOrder;
 use MoySklad\Entities\Documents\Processings\ProcessingPlan;
